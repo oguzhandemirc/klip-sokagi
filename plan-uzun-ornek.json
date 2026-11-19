@@ -1,0 +1,18 @@
+{
+ "ad": "rraenee-gta6-gun1-en-iyi-anlar",
+ "baslik": "RRaenee GTA 6'nın İLK GÜNÜ: En Komik 6 An 😂",
+ "kredi": "kick.com/rraenee", "kamera": "1390:144:530:296",
+ "aciklama": "RRaenee ve ekibinin GTA 6 ile ilk gününden sohbetin en çok patladığı 6 an: tekneyi ağaçlara gömmekten berberden kovulmaya.",
+ "hashtag": ["#GTA6", "#RRaenee", "#GTA6Türkiye"],
+ "kapak_metin": "BERBERDEN KOVULDU",
+ "kapak_bolum": 4,
+ "kapak_sn": 34,
+ "bolumler": [
+  {"girdi": "data/parca/13c4146d-12.mp4", "bas": 14, "sure": 40, "baslik": "Tekne ağaçlara gömüldü", "baglam": "Kaptan kestirmeden gitmeye karar veriyor…"},
+  {"girdi": "data/parca/13c4146d-16.mp4", "bas": 22, "sure": 37, "baslik": "Lucia polisten kaçamadı", "baglam": "Sudan çıkıp koşmaya başlıyorlar"},
+  {"girdi": "data/parca/13c4146d-17.mp4", "bas": 20, "sure": 38, "baslik": "Arka koltuk şoförleri", "baglam": "Herkes direksiyondakine akıl veriyor"},
+  {"girdi": "data/parca/13c4146d-15.mp4", "bas": 15, "sure": 38, "baslik": "Lavabo tamirinde misafir", "baglam": "\"Başımıza bir şey gelecek\" dediler"},
+  {"girdi": "data/parca/13c4146d-20.mp4", "bas": 8, "sure": 50, "baslik": "Berberden kovuldular", "baglam": "Gelecek kız için iyi görünmek isterken…"},
+  {"girdi": "data/parca/13c4146d-13.mp4", "bas": 18, "sure": 32, "baslik": "Tek atışta basket", "baglam": "Kaybolan topu bulduktan sonra"}
+ ]
+}

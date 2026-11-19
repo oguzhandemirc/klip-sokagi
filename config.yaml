@@ -1,0 +1,44 @@
+kanal_adi: ""                 # YouTube kanal adı
+dil: tr
+saat_dilimi: Europe/Istanbul
+gunluk_short_limiti: 2
+yayin_saatleri: ["13:00", "18:00", "21:00"]   # docs/strateji.md; kullanıcı 19 Kas: günde 3
+
+an_secimi:
+  adet: 10                    # kaynak başına en fazla an
+  dilim_saniye: 15
+  esik_sd: 2                  # eşik = ortalama + esik_sd × standart sapma
+  once_saniye: 25             # klip patlamadan kaç saniye önce başlar
+  sure_saniye: 40
+  agirlik:
+    sohbet: 1.0
+    youtube_isi: 3.0
+    twitch_klip: 1.0
+    ses: 0.5
+
+klip:
+  min_saniye: 20
+  max_saniye: 45
+
+isaretle:                     # onay ekranında uyarı olarak gösterilir
+  ilk_7sn_siddet: true
+  ara_sahne: true
+  radyo_muzigi: true
+
+insan_onayi_zorunlu: true
+
+# yayıncı başına kamera kutusu (kaynak videodaki piksel: x, y, genişlik, yükseklik)
+yayincilar:
+  rraenee:            # kick.com/rraenee, 1920x1080; 19 Kas 2026 GTA 6 yayınında 4 klipte doğrulandı
+    kamera: "1390:144:530:296"   # duzenle.py --kamera biçimi x:y:g:y (3 kişilik koltuk kamerası, sağ üst)
+
+# Hedef yayıncılar (19 Kas 2026 kullanıcı seçimi; klip_tara.py ölçümüne göre klip ekosistemi güçlü olanlar).
+# kick_bul.py ile doğrulandı. vod: Kick kayıtları erişilebilir mi; gta: son 15 yayında GTA sayısı.
+hedef_yayincilar:
+  - {ad: RRaenee,          kick: rraenee,         vod: evet,  gta: 7}
+  - {ad: Eray,             kick: eray,            vod: evet,  gta: 2}
+  - {ad: Tolunay Ören,     kick: tolunayoren,     vod: evet,  gta: 2}
+  - {ad: wtcN,             kick: wtcn,            vod: evet,  gta: 2}
+  - {ad: Kendine Müzisyen, kick: kendinemuzisyen, vod: evet,  gta: 0}   # IRL/sohbet
+  - {ad: Elraenn,          kick: elraenn,         vod: yok,   gta: 0}   # Kick kaydı yok; Twitch/YouTube bak
+  - {ad: Elwind,           kick: elwind,          vod: yok,   gta: 0}   # Kick kaydı yok; Twitch/YouTube bak

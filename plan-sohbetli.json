@@ -1,0 +1,46 @@
+[
+ {
+  "ad": "02-tek-atista-basket",
+  "girdi": "data/parca/13c4146d-13.mp4",
+  "bas": 28.2,
+  "sure": 22,
+  "kanca": "Bu atış girer mi?",
+  "kanca_sure": 0,
+  "kredi": "kick.com/rraenee",
+  "muzik": "muzik/Monkeys_Spinning_Monkeys.mp3",
+  "basliklar": [
+   "RRaenee'den İMKANSIZ atış? GTA 6 🏀",
+   "RRaenee bu atışı soktu mu? GTA 6",
+   "GTA 6'da tek atış, sohbet çıldırdı"
+  ],
+  "aciklama": "Kaybolan topu bulduktan sonra Jason'ın evindeki potaya tek bir atış deniyorlar. Top havadayken herkes nefesini tutuyor.\n\nKaynak: RRaenee — https://kick.com/rraenee\n\nMüzik: \"Monkeys Spinning Monkeys\" Kevin MacLeod (incompetech.com)\nLicensed under Creative Commons: By Attribution 4.0 License\nhttp://creativecommons.org/licenses/by/4.0/\n\n#GTA6 #GTA6Türkiye #Shorts #Basketbol",
+  "neden": "Atışın hemen ardından yayının en hızlı sohbet anlarından biri geldi ('OYYY', 'girdi', 'deliksiz'); görsel olarak bağlamsız da anlaşılıyor.",
+  "bilgi": [
+   "yayında 2:00:30",
+   "sohbet puanı 2.8"
+  ],
+  "sohbet": "data/parca/13c4146d-13-sohbet.json"
+ },
+ {
+  "ad": "03-tekne-mangrova-gomuldu",
+  "girdi": "data/parca/13c4146d-12.mp4",
+  "bas": 23.6,
+  "sure": 29,
+  "kanca": "Tekneyi ağaçlara gömdü",
+  "kanca_sure": 0,
+  "kredi": "kick.com/rraenee",
+  "muzik": "muzik/Pixel_Peeker_Polka_-_faster.mp3",
+  "basliklar": [
+   "RRaenee tekneyi ağaçlara GÖMDÜ 😂 GTA 6",
+   "RRaenee'nin görevi 30 saniyede bitti: GTA 6",
+   "GTA 6'nın EN KÖTÜ kaptanı"
+  ],
+  "aciklama": "GTA 6'da tekne görevinde kaptan rotayı biraz fazla kestirmeden seçiyor ve tekne mangrovların içine giriyor. Sonuç: görev başarısız.\n\nKaynak: RRaenee — https://kick.com/rraenee\n\nMüzik: \"Pixel Peeker Polka - faster\" Kevin MacLeod (incompetech.com)\nLicensed under Creative Commons: By Attribution 4.0 License\nhttp://creativecommons.org/licenses/by/4.0/\n\n#GTA6 #GTA6Türkiye #Shorts #GTA6Fail",
+  "neden": "Net bir başarısızlık anı (FAILED ekranı) ve 'Eyvah!' tepkisi; sohbet puanı 2.9 ile oynanış kesitleri arasında en yükseklerden.",
+  "bilgi": [
+   "yayında 0:46:40",
+   "sohbet puanı 2.9"
+  ],
+  "sohbet": "data/parca/13c4146d-12-sohbet.json"
+ }
+]
