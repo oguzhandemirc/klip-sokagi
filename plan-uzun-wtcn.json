@@ -1,0 +1,17 @@
+{
+ "ad": "wtcn-gta6-part2-en-iyi-anlar",
+ "baslik": "wtcN GTA 6'da PİLOT oldu: En Komik 5 An 😂",
+ "kredi": "kick.com/wtcn", "kamera": "0:142:466:259",
+ "aciklama": "wtcN'nin GTA 6 PART II yayınından sohbetin en çok patladığı 5 an: pilot lisansıyla uçak kazasından örgü saça yetmeyen paraya.",
+ "hashtag": ["#GTA6", "#wtcN", "#GTA6Türkiye"],
+ "kapak_metin": "PİLOTUM ABİ BEN",
+ "kapak_bolum": 0,
+ "kapak_sn": 33,
+ "bolumler": [
+  {"girdi": "data/parca/e0ca1c15-02.mp4", "bas": 11, "sure": 44, "baslik": "Pilot lisansı var(mış)", "baglam": "Kamyonetle olmayınca uçağa geçiyor…"},
+  {"girdi": "data/parca/e0ca1c15-08.mp4", "bas": 14, "sure": 35, "baslik": "ATV ile çiftlik turu", "baglam": "Lucia ile çiftliğe gidiyorlar"},
+  {"girdi": "data/parca/e0ca1c15-01.mp4", "bas": 22.5, "sure": 20, "baslik": "Direksiyon Jason'da", "baglam": "Depodan çıkıp ATV'ye biniyorlar"},
+  {"girdi": "data/parca/e0ca1c15-06.mp4", "bas": 19.5, "sure": 31, "baslik": "Kötü mü sürüyorum?", "baglam": "Araba zaten hurdaya dönmüş"},
+  {"girdi": "data/parca/e0ca1c15-15.mp4", "bas": 14, "sure": 36, "baslik": "Örgü saça para yetmedi", "baglam": "Sohbet Lucia için örgü istiyor"}
+ ]
+}

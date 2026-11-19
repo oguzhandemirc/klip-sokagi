@@ -9,10 +9,14 @@ Not: az izlenen ya da çok yeni videolarda ısı verisi olmaz.
 """
 import argparse
 import json
+import shutil
 import subprocess
+import sys
 from pathlib import Path
 
 KOK = Path(__file__).resolve().parent
+# venv etkin değilse (Windows'ta .venv\Scripts PATH'te olmaz) yt-dlp'yi çalışan Python'un yanında ara.
+YTDLP = shutil.which("yt-dlp") or str(Path(sys.executable).with_name("yt-dlp"))
 
 
 def main():
@@ -23,7 +27,7 @@ def main():
     ap.add_argument("--esik", type=float, default=0.5, help="tepe, ilk yüzde 5 dışındaki en yüksek değerin en az bu oranı olmalı")
     a = ap.parse_args()
 
-    cikti = subprocess.run(["yt-dlp", "--js-runtimes", "node", "--no-warnings", "--skip-download",
+    cikti = subprocess.run([YTDLP, "--js-runtimes", "node", "--no-warnings", "--skip-download",
                             "--dump-single-json", a.adres], capture_output=True, text=True, check=True).stdout
     bilgi = json.loads(cikti)
     isi = bilgi.get("heatmap") or []

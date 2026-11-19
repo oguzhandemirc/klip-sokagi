@@ -166,8 +166,10 @@ def transkript(ses, model_adi):
     with wave.open(str(ses)) as w:
         dizi = np.frombuffer(w.readframes(w.getnframes()), dtype=np.int16).astype(np.float32) / 32768
     model = WhisperModel(model_adi, device=CIHAZ, compute_type="int8" if CIHAZ == "cpu" else "float16")
+    # no_speech_threshold=None: sessizliği VAD zaten atıyor; eşik açıkken oyun sesi baskın 30 sn'lik pencere
+    # bütünüyle "konuşma yok" sayılıp düşüyordu (20 Kas 2026, wtcN 03: 29 sn klipte 0 kelime).
     parcalar, _ = model.transcribe(dizi, language="tr", word_timestamps=True, vad_filter=True,
-                                   condition_on_previous_text=False)
+                                   condition_on_previous_text=False, no_speech_threshold=None)
     kelimeler = []
     for p in parcalar:
         for k in p.words or []:
@@ -237,9 +239,16 @@ def main():
     with tempfile.TemporaryDirectory() as tmp:
         tmp = Path(tmp)
         ses = tmp / "ses.wav"
-        subprocess.run(["ffmpeg", "-v", "error", "-y", *kes, "-i", str(girdi), "-ac", "1", "-ar", "16000",
+        # Döküm klipten 15 sn önce başlar: klip oyun içi İngilizce diyalogla açılınca Whisper bağlamsız kalıp
+        # Türkçe konuşmayı kaçırıyordu (wtcN 03). Kelimeler sonra klip aralığına kaydırılıp ayıklanır.
+        on_pay = min(a.bas, 15)
+        kes_ses = ["-ss", str(a.bas - on_pay)] + (["-t", str(a.sure + on_pay)] if a.sure else [])
+        subprocess.run(["ffmpeg", "-v", "error", "-y", *kes_ses, "-i", str(girdi), "-ac", "1", "-ar", "16000",
                         str(ses)], check=True)
-        kelimeler = transkript(ses, a.model)
+        kelimeler = [{**k, "bas": round(k["bas"] - on_pay, 2), "son": round(k["son"] - on_pay, 2)}
+                     for k in transkript(ses, a.model) if k["son"] > on_pay + 0.1]
+        for k in kelimeler:
+            k["bas"] = max(0.0, k["bas"])
         obekler = gruplar(kelimeler)
 
         girdiler = ["-i", str(girdi)]
@@ -254,9 +263,12 @@ def main():
             oyun_h = Y - th
             kanca_y, kredi_y, altyazi_y = T_KANCA_Y, None, T_ALTYAZI_Y
             src_g, src_y = kaynak_boyut(girdi)
-            # Oyun: ekranın GERÇEK ortasından kırp (karakter ortada kalır); kameraya taşarsa sola kaydır.
+            # Oyun: ekranın GERÇEK ortasından kırp (karakter ortada kalır); kameraya taşarsa kameradan uzağa kaydır.
             ow = round(src_y * G / oyun_h / 2) * 2
-            ox = max(0, min(src_g // 2 - ow // 2, kx - ow))
+            if kx + kg // 2 >= src_g // 2:   # kamera sağda (RRaenee)
+                ox = max(0, min(src_g // 2 - ow // 2, kx - ow))
+            else:                            # kamera solda (wtcN)
+                ox = min(src_g - ow, max(src_g // 2 - ow // 2, kx + kg))
             filtre = [
                 "[0:v]split[b][c]",
                 # Kameranın üstü (boş duvar) kırpılır, kişiler kalır; 2 kat büyütüldüğü için hafif keskinleştirilir.

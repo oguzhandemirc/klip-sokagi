@@ -78,12 +78,22 @@ def aciklama_duzenle(metin, ekler=()):
     return metin + "\n\n" + " ".join(etiket), [k.lstrip("#") for k in etiket]
 
 
+def proje_yolu(yol):
+    """Kayıttaki yolu makineden bağımsız biçime çevirir (data/hazir/hd/x.mp4).
+    kayit.jsonl'de Mac (/Users/...) ve Windows (C:\\shorts\\...) mutlak yolları karışık bulunur."""
+    s = str(yol).replace("\\", "/")
+    if s.startswith("data/"):
+        return s
+    i = s.find("/data/")
+    return s[i + 1:] if i >= 0 else s
+
+
 def daha_once_yuklendi(video):
     if not KAYIT.exists():
         return None
     for satir in KAYIT.read_text().splitlines():
         k = json.loads(satir)
-        if k.get("dosya") == str(video):
+        if proje_yolu(k.get("dosya", "")) == proje_yolu(video):
             return k
     return None
 

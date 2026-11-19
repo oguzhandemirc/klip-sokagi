@@ -1,0 +1,2 @@
+# gorev.cmd bayt hizasına dayanır (çalışan görevler dosyayı kaldığı bayttan okur): satır sonu dönüştürme yapma.
+*.cmd -text

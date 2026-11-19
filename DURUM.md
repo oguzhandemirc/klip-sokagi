@@ -2,6 +2,29 @@
 
 > Her oturumun sonunda güncelle. En yeni kayıt en üstte.
 
+## 2026-11-20 gece — Oturum 6 (ThinkPad devraldı)
+
+- Devir tamam (DEVIR.md): ikinci paket açıldı, Mac döngüleri kapalı, yükleme YALNIZ ThinkPad'de.
+- Görev Zamanlayıcı `\KlipSokagi\`: `dongu` (10 dk), `gece` (eray:0 ✔ 1e73b293 15 aday, tolunayoren:1, wtcn:2), `bitince_rraenee`.
+  `yeniden_dene.py` yerine `dongu.py` + onaylı kuyruk `data/onayli/sira.txt` (05,01,04,06,07,08; sınır hâlâ kapalı).
+- **wtcN (e0ca1c15) üretildi, ONAY BEKLİYOR:** `data/hazir/wtcn/` 5 Short (onay sayfası index.html) +
+  yatay `data/hazir/uzun/wtcn-gta6-part2-en-iyi-anlar.mp4` (2:46). Planlar `plan-wtcn.json`, `plan-uzun-wtcn.json`.
+  Kamera `0:142:466:259` (sol üst) config.yaml'a yazıldı. Riskler: 02 tek altyazısı ağır küfür, 04'te küfür (sansür yok).
+- RRaenee gün 1 yatay videosu: DEVIR "yükle" diyor ama kullanıcı onayı kayıtlı değil → kullanıcıya soruldu, yüklenmedi.
+- Kod: `duzenle.py` kamera solda olunca oyunu ortadan kırpar; döküm klipten 15 sn önce başlar + `no_speech_threshold=None`
+  (wtcN 03 dökümü boş/İngilizce çıkıyordu); `bitince.py` RuntimeError yakalar; `gorev.cmd` sınırsız argüman, yalnız ASCII.
+- Ders: çalışan görevin `.cmd` dosyasını değiştirme (cmd kaldığı bayttan okur → uzun_wtcn görevi argümansız python'da asılı kaldı).
+  `Stop-ScheduledTask` Python alt süreçlerini öldürmez.
+
+## 2026-11-20 — Oturum 5 (ThinkPad, yerel Windows kurulumu)
+
+- Proje `C:\shorts`'a açıldı; Python 3.12.10, ffmpeg 9.0.2, git; `.venv` (3.12). Uyku/kapak eylemi prizdeyken kapalı.
+- Doğrulandı (yükleme yok): `yukle.py --giris` → Klip Sokağı; `canli.py rraenee` çalışıyor (RRaenee hâlâ canlı,
+  "GTA 6 - 2.YAYIN", 19 Kas 16:30'dan beri); 10 sn klip 72 sn'de üretildi (Mac'ten yavaş; ayrıntı `docs/kurulum-thinkpad.md`).
+- Windows düzeltmeleri: tekrar yükleme kilidi artık yolu `data/...` biçiminde karşılaştırır (Mac yolları eşleşmiyordu →
+  02/03 yeniden yüklenebilirdi), `tzdata` eklendi, yt-dlp venv dışından bulunur, `PYTHONUTF8=1`.
+- **Hiçbir döngü başlatılmadı, hiçbir şey yüklenmedi.** Mac'ten devir onayı ve ikinci paket (güncel kayit.jsonl) bekleniyor.
+
 ## 2026-11-19 gündüz — Oturum 4 (kullanıcıyla)
 
 - Aday sayısı: gece `--adet 20` sınırı benimdi. Eşik ort+2sd → 32 an, 1,5sd → 63, 1sd → 108 (aralık ≥ 90 sn).
@@ -29,7 +52,7 @@
 
 - **Sohbet katmanı denendi (2 klip, data/hazir/sohbetli/):** `sohbet_katman.py` klip aralığındaki seçme mesajları çıkarır (emote/link/boş/sponsor elenir, en çok 16, ≥0,6 sn arayla), `duzenle.py --sohbet` oyun panelinin sol altında son 4 mesajı akıtır. Plan alanı "sohbet". Kullanıcı görüşü bekleniyor.
 - **Kanal:** kullanıcının eski aboneliksiz "Futbol Sokağı" kanalı → **Klip Sokağı** (@klipsokagi). Görseller `marka_uret.py` → `marka/` (3 logo seçeneği, afiş, `aciklama.txt`).
-- **YouTube API bağlandı:** Google Cloud projesi, OAuth istemcisi (Desktop) → `client_secret.json`; `yukle.py --giris` ile token.json oluştu, bağlı kanal **Klip Sokağı (@klipsokagi)**. Kapsam: upload + readonly. Uygulama hâlâ **Testing** (token 7 günde düşer) → Branding doldurup "Publish app" yapılacak. permissions.csv boş → yükleme kilitli.
+- **YouTube API bağlandı:** Google Cloud projesi "YouTube-auto-video", OAuth istemcisi (Desktop) → `client_secret.json`; `yukle.py --giris` ile token.json oluştu, bağlı kanal **Klip Sokağı (@klipsokagi)**. Kapsam: upload + readonly. Uygulama hâlâ **Testing** (token 7 günde düşer) → Branding doldurup "Publish app" yapılacak. permissions.csv boş → yükleme kilitli.
 - **Kullanıcı kararı: tek tek yayıncı izni alınmayacak.** İzin kilidi kaldırıldı; yerine `yasakli.csv` (telif atanlar; Mithrain eklendi). CLAUDE.md kural 5 güncellendi.
 - **Gece hattı başladı (19 Kas ~23:30):** `gece.py wtcn:0 eray:0 tolunayoren:1 wtcn:2` (eşik 1,5 sd, aralık 45 sn,
   yayın başına 15 aday) → sinyal + an + parça + transkript; log `data/log/gece-*.txt`. Sabah: adayları incele, en iyi

@@ -9,11 +9,15 @@ Kullanım: .venv/bin/python klip_tara.py [--adet 40] → data/klip_tara.json + t
 """
 import argparse
 import json
+import shutil
 import subprocess
+import sys
 from collections import defaultdict
 from pathlib import Path
 
 KOK = Path(__file__).resolve().parent
+# venv etkin değilse (Windows'ta .venv\Scripts PATH'te olmaz) yt-dlp'yi çalışan Python'un yanında ara.
+YTDLP = shutil.which("yt-dlp") or str(Path(sys.executable).with_name("yt-dlp"))
 # ad: (arama adı, kendi kanal adında geçen parçalar)
 YAYINCILAR = {
     "Eray": ("eray can özkenar", ["eray"]),
@@ -35,7 +39,7 @@ YAYINCILAR = {
 
 
 def ara(sorgu, adet):
-    cikti = subprocess.run(["yt-dlp", "--flat-playlist", "-J", f"ytsearch{adet}:{sorgu}"],
+    cikti = subprocess.run([YTDLP, "--flat-playlist", "-J", f"ytsearch{adet}:{sorgu}"],
                            capture_output=True, text=True, timeout=180)
     if cikti.returncode:
         return []

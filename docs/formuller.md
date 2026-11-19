@@ -66,4 +66,9 @@ Bu dosya "neden böyle" sorusunun cevabıdır. Bir ayarı değiştirmeden önce 
   bütün yazılar Pillow PNG + overlay.
 - Yazı tipi: Arial Black/Bold; `duzenle.font_bul` Mac, Windows ve `fonts/` klasörüne bakar.
 - faster-whisper medium CPU (small hatalı). Whisper İngilizce küfrü "S**T" diye kendisi sansürler; Türkçe küfür sansürsüz (yapılacak).
+- Döküm klipten 15 sn ÖNCE başlar, kelimeler sonra klibe kaydırılır; `no_speech_threshold=None` (VAD sessizliği zaten atar).
+  Neden: < 30 sn klip tek pencere; oyun içi İngilizce diyalogla açılınca pencere "konuşma yok" sayılıp düşüyor ya da
+  sıcaklık örneklemesine geçip yalnız İngilizceyi yazıyordu (wtcN 03, 20 Kas 2026).
+- Kamera solda (wtcN) → oyun ortadan kırpılır, kameradan sağa kaydırılır; sağda (RRaenee) → sola. Koordinatlar config.yaml.
+- ThinkPad (i5-10310U) hızı: 30-40 sn HD Short ≈ 4,5 dk; 2:46 yatay video ≈ 20 dk.
 - Komut kuralı: betik dosyasını heredoc ile yazma, Write aracıyla yaz, tek satırla çalıştır (izin sorusu çıkıp gece iş durmasın).

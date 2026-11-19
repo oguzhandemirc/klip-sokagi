@@ -17,6 +17,8 @@ from datetime import datetime, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
+from yukle import proje_yolu
+
 KOK = Path(__file__).resolve().parent
 KAYIT = KOK / "data" / "yuklendi" / "kayit.jsonl"
 TZ = ZoneInfo("Europe/Istanbul")
@@ -32,7 +34,7 @@ def dolu_ve_yuklu():
     if KAYIT.exists():
         for s in KAYIT.read_text().splitlines():
             k = json.loads(s)
-            yuklu.add(k["dosya"])
+            yuklu.add(proje_yolu(k["dosya"]))
             if k.get("publishAt"):
                 dolu.add(datetime.fromisoformat(k["publishAt"]).astimezone(TZ).strftime("%Y-%m-%d %H:%M"))
     return dolu, yuklu
@@ -61,8 +63,7 @@ def main():
         en_erken = max(en_erken, max(datetime.strptime(d, "%Y-%m-%d %H:%M").replace(tzinfo=TZ) for d in dolu))
     slot = bos_saatler(dolu, en_erken)
     for v in a.videolar:
-        yol = str(Path(v).resolve())
-        if yol in yuklu:
+        if proje_yolu(Path(v).resolve()) in yuklu:
             print(f"= {Path(v).name} zaten yüklü, atlandı")
             continue
         zaman = next(slot)

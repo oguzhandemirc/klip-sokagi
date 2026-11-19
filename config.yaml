@@ -31,6 +31,8 @@ insan_onayi_zorunlu: true
 yayincilar:
   rraenee:            # kick.com/rraenee, 1920x1080; 19 Kas 2026 GTA 6 yayınında 4 klipte doğrulandı
     kamera: "1390:144:530:296"   # duzenle.py --kamera biçimi x:y:g:y (3 kişilik koltuk kamerası, sağ üst)
+  wtcn:               # kick.com/wtcn, 1920x1080; 19 Kas 2026 GTA VI PART II, 5 parçada doğrulandı (sol üst)
+    kamera: "0:142:466:259"
 
 # Hedef yayıncılar (19 Kas 2026 kullanıcı seçimi; klip_tara.py ölçümüne göre klip ekosistemi güçlü olanlar).
 # kick_bul.py ile doğrulandı. vod: Kick kayıtları erişilebilir mi; gta: son 15 yayında GTA sayısı.

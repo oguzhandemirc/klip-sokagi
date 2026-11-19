@@ -5,15 +5,14 @@ Kullanım: .venv/bin/python aciklama_guncelle.py [--gercek]   (kayit.jsonl'deki 
 """
 import json
 import sys
-from pathlib import Path
 
-from yukle import KAYIT, aciklama_duzenle, servis
+from yukle import KAYIT, KOK, aciklama_duzenle, proje_yolu, servis
 
 gercek = "--gercek" in sys.argv
 yt = servis()
 for satir in KAYIT.read_text().splitlines():
     k = json.loads(satir)
-    meta = json.loads(Path(k["dosya"]).with_suffix(".json").read_text())
+    meta = json.loads((KOK / proje_yolu(k["dosya"])).with_suffix(".json").read_text())
     aciklama, etiketler = aciklama_duzenle(meta.get("aciklama", ""), meta.get("ek_yayincilar", []))
     v = yt.videos().list(part="snippet", id=k["id"]).execute()["items"][0]
     sn = v["snippet"]

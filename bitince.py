@@ -22,7 +22,7 @@ bitis = time.time() + a.en_cok_saat * 3600
 while time.time() < bitis:
     try:
         canli = (getir(f"https://kick.com/api/v2/channels/{a.kanal}", deneme=3) or {}).get("livestream")
-    except SystemExit:
+    except (RuntimeError, SystemExit):  # getir() ulaşamayınca RuntimeError fırlatır
         canli = True  # bakamadıysak canlı say, sonra yine bak
     if not canli:
         print(f"{datetime.now():%H:%M} {a.kanal} yayını bitti; kaydın oturması için 15 dk bekleniyor", flush=True)

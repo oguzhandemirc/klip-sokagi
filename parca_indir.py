@@ -9,10 +9,14 @@ Kullanım:
 """
 import argparse
 import json
+import shutil
 import subprocess
+import sys
 from pathlib import Path
 
 KOK = Path(__file__).resolve().parent
+# venv etkin değilse (Windows'ta .venv\Scripts PATH'te olmaz) yt-dlp'yi çalışan Python'un yanında ara.
+YTDLP = shutil.which("yt-dlp") or str(Path(sys.executable).with_name("yt-dlp"))
 
 # Üstte ve altta bulanık arka plan, ortada videonun tamamı: hiçbir şey kırpılmaz.
 DIKEY_FILTRE = (
@@ -50,7 +54,7 @@ def main():
         dikey = KOK / "data" / "hazir" / f"{on_ek}-{an['sira']:02d}-dikey.mp4"
         print(f"{an['sira']:2d}: {bas} sn'den {sure} sn kesiliyor…", flush=True)
         if not ham.exists() and yayin.get("platform") in ("youtube", "twitch"):
-            calistir(["yt-dlp", "--no-warnings", "-q", "--download-sections", f"*{bas}-{bas + sure}",
+            calistir([YTDLP, "--no-warnings", "-q", "--download-sections", f"*{bas}-{bas + sure}",
                       "-S", "res:1080,ext:mp4:m4a", "--remux-video", "mp4", "-o", str(ham), yayin["kaynak"]])
         elif not ham.exists():
             calistir(["ffmpeg", "-v", "error", "-y", "-ss", str(bas), "-i", yayin["kaynak"],

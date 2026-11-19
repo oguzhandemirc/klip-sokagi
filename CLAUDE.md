@@ -37,6 +37,8 @@ SİNYAL → AN SEÇ → PARÇA KES → TRANSKRİPT → (Claude inceler, plan yaz
 | Açıklama güncelle | `aciklama_guncelle.py --gercek` | kural değişince |
 | Ek yayıncı | `ek_yayinci.py <Ad> <meta.json>...` | |
 | Yayıncı tarama | `klip_tara.py`, `kick_bul.py` | telif göstergesi |
+| **Otomatik döngü** | `dongu.py [--kuru]` | Görev Zamanlayıcı 10 dk; onaylı kuyruk `data/onayli/sira.txt` → yükle, temizle, yeni yayın → gece.py; aday çıkınca `data/inceleme-bekliyor.txt` |
+| Görev başlatıcı | `gorev.cmd <log> <betik> ...` | Görev Zamanlayıcı için; log `data/log/<log>.log` |
 
 ## 3. Çalışma kuralları
 1. Kullanıcıya dönük her metin Türkçe. Değişken/dosya adları ASCII. Kullanıcı kod bilmiyor varsay.
@@ -50,6 +52,9 @@ SİNYAL → AN SEÇ → PARÇA KES → TRANSKRİPT → (Claude inceler, plan yaz
 9. Gelir tahmini yapma; ölçülen veriyle konuş.
 10. Oturum sonunda `DURUM.md`'ye (en üste) kısa kayıt düş; kalıcı yeni bilgi `docs/formuller.md`'ye.
 11. İki makine aynı anda yükleme yapmasın (tekrar yükleme). Yükleme kaydı `data/yuklendi/kayit.jsonl`.
+12. **Git (github.com/oguzhandemirc/klip-sokagi):** her oturum başında `git pull`; her değişiklikten sonra commit + push.
+    Çakışmada daha ileri olan sürüm kalır (ikisi de ileriyse birleştir); körlemesine `checkout`/`reset --hard` yok.
+    `token.json`, `client_secret.json`, `.env`, `data/` asla commit'e girmez.
 
 ## 4. Yol haritası
 - [x] Sinyal + an seçimi (Kick) · parça kesme · Short düzenleme (HD) · yatay video · başlık/açıklama kuralları
