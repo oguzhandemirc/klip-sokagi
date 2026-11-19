@@ -52,7 +52,8 @@ SİNYAL → AN SEÇ → PARÇA KES → TRANSKRİPT → (Claude inceler, plan yaz
 9. Gelir tahmini yapma; ölçülen veriyle konuş.
 10. Oturum sonunda `DURUM.md`'ye (en üste) kısa kayıt düş; kalıcı yeni bilgi `docs/formuller.md`'ye.
 11. İki makine aynı anda yükleme yapmasın (tekrar yükleme). Yükleme kaydı `data/yuklendi/kayit.jsonl`.
-12. **Git (github.com/oguzhandemirc/klip-sokagi):** her oturum başında `git pull`; her değişiklikten sonra commit + push.
+12. **Git (github.com/oguzhandemirc/klip-sokagi):** her değişiklikten sonra commit + push. Depoyu yalnız ThinkPad günceller;
+    `git pull` yalnız kullanıcı "başka bilgisayardan güncelledim" derse.
     Çakışmada daha ileri olan sürüm kalır (ikisi de ileriyse birleştir); körlemesine `checkout`/`reset --hard` yok.
     `token.json`, `client_secret.json`, `.env`, `data/` asla commit'e girmez.
 
