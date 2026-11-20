@@ -34,6 +34,10 @@ yayincilar:
   wtcn:               # kick.com/wtcn, 1920x1080; 19 Kas 2026 GTA VI PART II, 5 parçada doğrulandı (sol üst)
     kamera: "0:142:466:259"
 
+# dongu.py otomatik keşfi yalnız bu kanallara bakar (20 Kas 2026 kullanıcı: "şimdilik yalnız RRaenee; YouTube'a
+# kısıtsız çok video koyabilince diğer yayıncılara bakarız"). Boş bırakılırsa aşağıdaki listenin hepsi.
+kesif_kanallari: [rraenee]
+
 # Hedef yayıncılar (19 Kas 2026 kullanıcı seçimi; klip_tara.py ölçümüne göre klip ekosistemi güçlü olanlar).
 # kick_bul.py ile doğrulandı. vod: Kick kayıtları erişilebilir mi; gta: son 15 yayında GTA sayısı.
 hedef_yayincilar:

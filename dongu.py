@@ -209,11 +209,15 @@ def kesif(durum, calisan, kuru):
         log(f"✘ keşif atlandı: diskte yalnız {bos:.1f} GB boş")
         return
     durum["kesif_zamani"] = time.time()
-    hedefler = (yaml.safe_load((KOK / "config.yaml").read_text()) or {}).get("hedef_yayincilar", [])
+    ayar = yaml.safe_load((KOK / "config.yaml").read_text()) or {}
+    hedefler = ayar.get("hedef_yayincilar", [])
+    sinir = set(ayar.get("kesif_kanallari") or [])
     adaylar = []
     for h in hedefler:
         kanal = h.get("kick")
         if not kanal or h.get("vod") != "evet" or yasakli_mi(f"kick.com/{kanal}"):
+            continue
+        if sinir and kanal not in sinir:
             continue
         if any("bitince.py" in c and kanal in c for c in calisan):
             continue  # yayın bitince bitince.py işleyecek
