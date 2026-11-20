@@ -65,7 +65,12 @@ Bu dosya "neden böyle" sorusunun cevabıdır. Bir ayarı değiştirmeden önce 
 - Python 3.12 `.venv` (3.15'te av derlenmiyor). ffmpeg ≥ 7 (`-/filter_complex`). Mac'teki ffmpeg'de libass/drawtext yok →
   bütün yazılar Pillow PNG + overlay.
 - Yazı tipi: Arial Black/Bold; `duzenle.font_bul` Mac, Windows ve `fonts/` klasörüne bakar.
-- faster-whisper medium CPU (small hatalı). Whisper İngilizce küfrü "S**T" diye kendisi sansürler; Türkçe küfür sansürsüz (yapılacak).
+- faster-whisper medium CPU (small hatalı). Whisper İngilizce küfrü "S**T" diye kendisi sansürler; Türkçe küfür sansürsüz.
+- **Küfür kararı (kullanıcı, 20 Kas 2026): sansür YOK.** Gerekçe YouTube reklam dostu kuralları (support.google.com/youtube/answer/6162278,
+  Temmuz 2025 güncellemesi): videoda ara sıra ağır küfür tam gelir alır, ilk 7 sn dahil. Sınırlı/sıfır gelir yalnız şunlarda:
+  küfür videonun ana unsuruysa (cümlelerin çoğu), **başlık/küçük resimde küfür**, nefret içerikli hakaret.
+  Kural: başlık, açıklama, kanca yazısı ve küçük resimde asla küfür yok; küfrün baskın olduğu an seçilmez.
+  Kural değişirse ya da bir klip "sınırlı reklam" (sarı $) alırsa sansür/kesme yeniden değerlendirilir.
 - Döküm klipten 15 sn ÖNCE başlar, kelimeler sonra klibe kaydırılır; `no_speech_threshold=None` (VAD sessizliği zaten atar).
   Neden: < 30 sn klip tek pencere; oyun içi İngilizce diyalogla açılınca pencere "konuşma yok" sayılıp düşüyor ya da
   sıcaklık örneklemesine geçip yalnız İngilizceyi yazıyordu (wtcN 03, 20 Kas 2026).
