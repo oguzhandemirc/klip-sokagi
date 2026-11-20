@@ -183,7 +183,9 @@ def temizle(kuru):
 
 
 # ---------- 3. Keşif ----------
-def gece_bitenleri_bildir(durum, kuru):
+def gece_bitenleri_bildir(durum, calisan, kuru):
+    if any("gece.py" in c or "transkript.py" in c for c in calisan):
+        return  # dökümler bitmeden aday sayısı eksik çıkar
     for uuid, b in durum.get("islenen", {}).items():
         if b.get("bildirildi"):
             continue
@@ -273,7 +275,7 @@ def main():
         durum = json.loads(DURUM.read_text()) if DURUM.exists() else {}
         calisan = calisan_betikler()
         for adim in (lambda: yukle(durum, calisan, a.kuru), lambda: temizle(a.kuru),
-                     lambda: gece_bitenleri_bildir(durum, a.kuru), lambda: kesif(durum, calisan, a.kuru)):
+                     lambda: gece_bitenleri_bildir(durum, calisan, a.kuru), lambda: kesif(durum, calisan, a.kuru)):
             try:
                 adim()
             except Exception as h:  # bir adımın hatası diğerlerini durdurmasın
