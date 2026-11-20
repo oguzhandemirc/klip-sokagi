@@ -11,7 +11,10 @@ Her çalışmada:
  3. Keşif   — 30 dk'da bir: hedef yayıncıların son 72 sa'te biten GTA yayınlarından işlenmemiş en tazesini
               gece.py ile işler (sinyal → an → parça → transkript; ayrı süreç, döngüyü bekletmez).
               gece.py zaten çalışıyorsa ya da kanal için bitince.py bekliyorsa atlar. Biten adaylar
-              data/inceleme-bekliyor.txt'ye yazılır: Claude inceler, plan yazar, üretir; kullanıcı onaylarsa sira.txt'ye.
+              data/inceleme-bekliyor.txt'ye yazılır.
+ 4. Üretim  — adayı çıkan yayın için gözetimsiz Claude Code oturumu (docs/oto-uretim.md, Sonnet): inceler, Short +
+              yatay üretir, kontrol eder, sira.txt'ye koyar, commit+push. İnsan onayı yok (kullanıcı kararı 20 Kas 2026).
+              Bitince data/oto/<önek>.bitti; yoksa 4 sa sonra yarım sayılıp bir kez daha denenir.
 
 sira.txt: satır başına bir mp4 yolu (C:\\shorts'a göre), # ile başlayan satır yorum.
 Kullanım: .venv\\Scripts\\python dongu.py [--kuru]   (kuru: hiçbir şey yüklemez/silmez/başlatmaz, ne yapacağını yazar)
@@ -200,6 +203,47 @@ def gece_bitenleri_bildir(durum, calisan, kuru):
             log(f"✔ inceleme bekliyor: {b['kanal']} {uuid[:8]} ({len(adaylar)} aday)")
 
 
+OTO = DATA / "oto"
+OTO_SURE = 4 * 3600      # bir üretim oturumu bundan uzun sürerse yarım sayılır
+OTO_DENEME = 2
+
+
+def claude_yolu():
+    return shutil.which("claude") or str(Path.home() / ".local" / "bin" / "claude.exe")
+
+
+def oto_uretim(durum, calisan, kuru):
+    """Adayları biten yayın için gözetimsiz Claude Code oturumu başlatır (docs/oto-uretim.md): inceler, üretir,
+    kuyruğa koyar. Kullanıcı kararı 20 Kas 2026: insan onayı yok. Aynı anda tek oturum."""
+    if any("gece.py" in c or "transkript.py" in c for c in calisan):
+        return
+    sinir = set((yaml.safe_load((KOK / "config.yaml").read_text()) or {}).get("kesif_kanallari") or [])
+    oto = durum.setdefault("oto", {})
+    simdi = time.time()
+    if any(not (OTO / f"{o}.bitti").exists() and simdi - b["zaman"] < OTO_SURE for o, b in oto.items()):
+        return  # bir oturum hâlâ çalışıyor
+    for uuid, b in durum.get("islenen", {}).items():
+        on_ek = uuid[:8]
+        if not b.get("bildirildi") or (sinir and b["kanal"] not in sinir) or (OTO / f"{on_ek}.bitti").exists():
+            continue
+        kayit = oto.setdefault(on_ek, {"deneme": 0, "zaman": 0})
+        if kayit["deneme"] >= OTO_DENEME:
+            continue
+        log(f"▶ gözetimsiz üretim: {b['kanal']} {on_ek}" + (f" (deneme {kayit['deneme'] + 1})" if kayit["deneme"] else ""))
+        if kuru:
+            return
+        kayit["deneme"] += 1
+        kayit["zaman"] = simdi
+        (OTO / on_ek).mkdir(parents=True, exist_ok=True)
+        log_dosya = (DATA / "log" / f"oto-{on_ek}.log").open("a", encoding="utf-8")
+        log_dosya.write(f"==== {datetime.now():%Y-%m-%d %H:%M} deneme {kayit['deneme']}\n")
+        log_dosya.flush()
+        komut = [claude_yolu(), "-p", f"docs/oto-uretim.md talimatını uygula. Yayın öneki: {on_ek}",
+                 "--model", "sonnet", "--permission-mode", "bypassPermissions"]
+        ayrik_baslat(komut, log_dosya)
+        return  # tek oturum
+
+
 def kesif(durum, calisan, kuru):
     from sinyal import kick_yayinlar
     if time.time() - durum.get("kesif_zamani", 0) < KESIF_ARA:
@@ -256,6 +300,11 @@ def gece_baslat(yayinlar):
     log_dosya = (DATA / "log" / "gece.log").open("a")
     log_dosya.write(f"==== {datetime.now():%Y-%m-%d %H:%M} dongu.py → gece.py {' '.join(yayinlar)}\n")
     log_dosya.flush()
+    ayrik_baslat([sys.executable, str(KOK / "gece.py"), *yayinlar], log_dosya)
+
+
+def ayrik_baslat(komut, log_dosya):
+    """Komutu döngüden bağımsız süreç olarak başlatır (saatler sürebilir; döngü beklemesin)."""
     ek = {}
     if os.name == "nt":
         ek["creationflags"] = (subprocess.DETACHED_PROCESS | subprocess.CREATE_NEW_PROCESS_GROUP
@@ -263,7 +312,6 @@ def gece_baslat(yayinlar):
     else:
         ek["start_new_session"] = True
     ortam = {**os.environ, "PYTHONUTF8": "1", "PYTHONUNBUFFERED": "1"}
-    komut = [sys.executable, str(KOK / "gece.py"), *yayinlar]
     try:
         subprocess.Popen(komut, cwd=KOK, stdout=log_dosya, stderr=subprocess.STDOUT, env=ortam, **ek)
     except OSError:  # iş nesnesi ayrılmaya izin vermiyorsa ayrılmadan başlat
@@ -281,7 +329,8 @@ def main():
         durum = json.loads(DURUM.read_text()) if DURUM.exists() else {}
         calisan = calisan_betikler()
         for adim in (lambda: yukle(durum, calisan, a.kuru), lambda: temizle(a.kuru),
-                     lambda: gece_bitenleri_bildir(durum, calisan, a.kuru), lambda: kesif(durum, calisan, a.kuru)):
+                     lambda: gece_bitenleri_bildir(durum, calisan, a.kuru), lambda: oto_uretim(durum, calisan, a.kuru),
+                     lambda: kesif(durum, calisan, a.kuru)):
             try:
                 adim()
             except Exception as h:  # bir adımın hatası diğerlerini durdurmasın

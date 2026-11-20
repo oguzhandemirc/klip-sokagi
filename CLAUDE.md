@@ -17,7 +17,7 @@ Kesin kararlar (kullanıcı verdi, yeniden tartışma):
 
 ## 2. Hat ve betikler
 ```
-SİNYAL → AN SEÇ → PARÇA KES → TRANSKRİPT → (Claude inceler, plan yazar) → ÜRET → ONAY → YÜKLE (gizli+planlı) → ÖLÇ
+SİNYAL → AN SEÇ → PARÇA KES → TRANSKRİPT → (gözetimsiz Claude inceler, plan yazar) → ÜRET → KUYRUK → YÜKLE (gizli+planlı) → ÖLÇ
 ```
 | İş | Betik | Not |
 |---|---|---|
@@ -45,7 +45,9 @@ SİNYAL → AN SEÇ → PARÇA KES → TRANSKRİPT → (Claude inceler, plan yaz
 2. Betik dosyasını heredoc ile yazma; Write aracıyla yaz, tek satırla çalıştır (gözetimsiz işte izin sorusu çıkmasın). Alt ajana da yaz.
 3. Sırlar (`client_secret.json`, `token.json`, `.env`) git dışı; koda, loga, sohbete yazılmaz.
 4. `yasakli.csv`deki yayıncı işlenmez. Telif/kaldırma talebi gelirse hemen ekle, kullanıcıya bildir.
-5. **İnsan onayı:** kullanıcı onayı olmadan yayın yapılmaz. Gizli+planlı yükleme yayından önce Studio'da görülebilir.
+5. **Onay yok, Claude karar verir (kullanıcı kararı 20 Kas 2026):** amaç en çok izlenme; seçilen klipler doğrudan
+   `data/onayli/sira.txt`'ye girer, dongu.py gizli+planlı yükler. Kullanıcı Studio'dan yayın öncesi silebilir (veto).
+   Clickbait serbest ama klipte olmayanı vaat etmez (YouTube yanıltıcı meta veriyi spam sayar → ihtar). Gözetimsiz akış: `docs/oto-uretim.md`.
 6. Ele: ara sahne ağırlıklı, hikâye sonu/spoiler, hile/mod, sızıntı, cinsel içerik. İlk 7 sn'de grafik şiddet varsa işaretle.
 7. Müzik yalnız `muzik/` (CC BY); açıklamada müzik kredisi zorunlu.
 8. Yüklenen klibin ham parçasını ve çıktısını yüklemeden sonra silebilirsin (disk).

@@ -2,6 +2,15 @@
 
 > Her oturumun sonunda güncelle. En yeni kayıt en üstte.
 
+## 2026-11-20 öğlen — Oturum 6 devam
+
+- YouTube sınırı 11:49'da açıldı; dongu.py yükledi: gün1 yatay (20 Kas 20:00), 05/01 (20 Kas 18:00/21:00),
+  04/06/07 (21 Kas), 08 (22 Kas 13:00). Gün 2 (aa4d56b7) 5 Short + yatay kuyrukta (22 Kas 18:00'den; yatay 23 Kas 20:00).
+- **Kullanıcı kararı: insan onayı kaldırıldı**, amaç en çok izlenme, clickbait serbest (yanıltıcı değil). CLAUDE.md kural 5.
+- **Tam otomasyon:** dongu.py adayı çıkan yayın için gözetimsiz `claude -p` (Sonnet, docs/oto-uretim.md) başlatır →
+  inceler, üretir, kuyruğa koyar, commit+push; bitince `data/oto/<önek>.bitti`, log `data/log/oto-<önek>.log`.
+- wtcN (5 Short + yatay) üretildi ama kullanıcı "şimdilik yalnız RRaenee" dediği için kuyrukta değil.
+
 ## 2026-11-20 sabaha karşı — Oturum 6 devam (kullanıcı uyuyor)
 
 - Kullanıcı: **şimdilik yalnız RRaenee** (config `kesif_kanallari: [rraenee]`); diğer yayıncılar YouTube'a kısıtsız
