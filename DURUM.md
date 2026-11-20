@@ -2,7 +2,16 @@
 
 > Her oturumun sonunda güncelle. En yeni kayıt en üstte.
 
-## 2026-11-20 gece — Oturum 6 (ThinkPad devraldı)
+## 2026-11-20 sabaha karşı — Oturum 6 devam (kullanıcı uyuyor)
+
+- Kullanıcı: **şimdilik yalnız RRaenee** (config `kesif_kanallari: [rraenee]`); diğer yayıncılar YouTube'a kısıtsız
+  yükleyebilince. Eray aea421a4 işi durduruldu (13 aday var, incelenmedi).
+- **RRaenee 19 Kas "GTA 6 - 2.YAYIN" (aa4d56b7) işlendi, ONAY BEKLİYOR:** `data/hazir/rraenee/2026-11-19/`
+  shorts/ 01 pusu, 02 chat saç seçti, 03 uçak kalkmadı, 04 bagajdan 50 bin dolar, 05 yolcu çıldırttı (+ index.html);
+  video/ rraenee-gta6-gun2-en-iyi-anlar (3:12, 5 bölüm). Planlar `plan-rraenee-2026-11-19.json`, `plan-uzun-rraenee-2026-11-19.json`.
+  Verim düşük: 40 adaydan 5 (sponsor çekilişi, IRL, ara sahne, cinsel içerik çok). 10/12/17/33/39 parçaları
+  Kick'ten inmiyor (6,5-7,2. saat, HLS I/O error). an listesi 40'a genişletildi (yedek `*-anlar-15-yedek.json`).
+- dongu.py: süreç listesi kodlama hatasıyla ara sıra çöküyordu → düzeltildi. bitince.py 02:33'te 0xC000013A ile kapanmıştı (nedeni belirsiz).
 
 - **Klasör düzeni (kullanıcı kararı):** `data/hazir/<yayıncı>/<yayın tarihi>/{shorts,video}/`. Eski hd/, wtcn/, uzun/ taşındı;
   kayit.jsonl (yedek `kayit-yedek-klasor-oncesi.jsonl`) ve sira.txt yolları güncellendi. uretim.py/uzun.py klasörü kendi bulur.

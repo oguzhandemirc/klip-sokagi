@@ -53,12 +53,14 @@ def log(*m):
 def calisan_betikler():
     """Çalışan python süreçlerinin komut satırları (gece.py/bitince.py/planla.py çakışmasını önlemek için)."""
     if os.name == "nt":
+        # Çıktı UTF-8'e zorlanır; yine de çözülemeyen karakter turu düşürmesin (errors="replace").
         komut = ["powershell", "-NoProfile", "-Command",
+                 "[Console]::OutputEncoding=[Text.Encoding]::UTF8; "
                  "Get-CimInstance Win32_Process -Filter \"Name='python.exe'\" | ForEach-Object CommandLine"]
     else:
         komut = ["ps", "-eo", "args"]
-    r = subprocess.run(komut, capture_output=True, text=True)
-    return [s for s in r.stdout.splitlines() if "python" in s.lower() or s.strip().endswith(".py")]
+    r = subprocess.run(komut, capture_output=True, encoding="utf-8", errors="replace")
+    return [s for s in (r.stdout or "").splitlines() if "python" in s.lower() or s.strip().endswith(".py")]
 
 
 def kilit_al():

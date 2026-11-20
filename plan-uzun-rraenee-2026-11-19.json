@@ -1,0 +1,17 @@
+{
+ "ad": "rraenee-gta6-gun2-en-iyi-anlar",
+ "baslik": "RRaenee GTA 6 2. GÜN'de Oynadı: En İyi 5 An 😂",
+ "kredi": "kick.com/rraenee", "kamera": "1390:144:530:296",
+ "aciklama": "RRaenee'nin GTA 6 - 2.YAYIN'ından (19 Kasım 2026) sohbetin en çok tepki verdiği 5 an: berberde saç oylamasından bagajdan çıkan 50 bin dolara.\n\n0:00 Chat saça karar verdi\n0:42 Yolcu RRaenee'yi çıldırttı\n1:22 Uçak bir türlü kalkmadı\n1:54 Depoda pusuya düştüler\n2:36 Bagajdan 50 bin dolar çıktı\n\n#GTA6 #RRaenee #GTA6Türkiye",
+ "hashtag": ["#GTA6", "#RRaenee", "#GTA6Türkiye"],
+ "kapak_metin": "5 EN İYİ AN",
+ "kapak_bolum": 0,
+ "kapak_sn": 22,
+ "bolumler": [
+  {"girdi": "data/parca/aa4d56b7-15.mp4", "bas": 16, "sure": 42, "baslik": "Chat saça karar verdi", "baglam": "GTA 6'daki berber sahnesinde karakterin yeni saçını sohbete soruyorlar"},
+  {"girdi": "data/parca/aa4d56b7-24.mp4", "bas": 19, "sure": 40, "baslik": "Yolcu RRaenee'yi çıldırttı", "baglam": "Yayaya ramak kala kazalar ve 500 dolarlık ücret pazarlığı tartışması başlıyor"},
+  {"girdi": "data/parca/aa4d56b7-22.mp4", "bas": 9, "sure": 32, "baslik": "Uçak bir türlü kalkmadı", "baglam": "Küçük uçağı havalandırmaya çalışırken motor art arda ateşlenmiyor, uçak suya kayıyor"},
+  {"girdi": "data/parca/aa4d56b7-13.mp4", "bas": 14, "sure": 42, "baslik": "Depoda pusuya düştüler", "baglam": "Kapıdan girerken beklenmedik bir arbedeye yakalanıyorlar"},
+  {"girdi": "data/parca/aa4d56b7-38.mp4", "bas": 23, "sure": 36, "baslik": "Bagajdan 50 bin dolar çıktı", "baglam": "Küçük bir kazadan özür diledikten sonra çarptıkları arabanın bagajını açıp parayı buluyorlar"}
+ ]
+}
