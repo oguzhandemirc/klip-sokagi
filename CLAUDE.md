@@ -27,8 +27,8 @@ SİNYAL → AN SEÇ → PARÇA KES → TRANSKRİPT → (Claude inceler, plan yaz
 | Kes | `parca_indir.py <anlar.json> --adet 15` | m3u8'den |
 | Döküm + kare özeti | `transkript.py data/parca/<önek>-*.mp4` | inceleme için |
 | Toplu gece hattı | `gece.py kanal:sira ...` / `bitince.py <kanal>` | yükleme yapmaz |
-| Short üret | `uretim.py plan.json --klasor data/hazir/hd --kamera x:y:g:y --yerlesim tam` | `duzenle.py` |
-| Yatay video | `uzun.py plan-uzun.json` | 2-5 dk + küçük resim |
+| Short üret | `uretim.py plan.json --kamera x:y:g:y --yerlesim tam` | `duzenle.py`; çıktı `data/hazir/<yayıncı>/<tarih>/shorts/` (kendisi bulur) |
+| Yatay video | `uzun.py plan-uzun.json` | 2-5 dk + küçük resim; çıktı `.../<tarih>/video/` |
 | Onay sayfası | `onay.py <klasör>` | index.html |
 | Yükle | `yukle.py <mp4> --zaman "AAAA-GG-AA SS:DD" --gercek` | kuru çalışma varsayılan |
 | Takvime dağıt | `planla.py <mp4>... --gercek` | config `yayin_saatleri` |
@@ -74,5 +74,10 @@ shorts/
 ├── marka/                 # logo, afiş, kanal açıklaması
 ├── muzik/                 # CC BY müzikler
 ├── *.py                   # betikler (tablo yukarıda)
-└── data/                  # sohbet/ parca/ hazir/ yuklendi/ log/ (git dışı)
+└── data/                  # sohbet/ parca/ hazir/ onayli/ yuklendi/ log/ (git dışı)
+    └── hazir/<yayıncı>/<yayın tarihi>/      # ör. hazir/wtcn/2026-11-19/  (kullanıcı kararı 20 Kas 2026)
+        ├── shorts/        # dikey Short'lar + .json meta + index.html onay sayfası
+        └── video/         # yatay 2-5 dk videolar + küçük resim
 ```
+Yayıncı = Kick kanal adı, tarih = yayının İstanbul saatiyle başladığı gün (`klasor.py`). Dosya taşınırsa
+`data/yuklendi/kayit.jsonl` yolları da güncellenmeli (tekrar yükleme kilidi yola bakar).

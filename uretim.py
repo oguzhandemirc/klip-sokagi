@@ -7,7 +7,8 @@ Plan (JSON listesi), her öğe:
    "kamera": "1390:144:530:296" (isteğe bağlı),
    "basliklar": [...], "aciklama": "...", "neden": "...", "bilgi": ["3:41:00", "sohbet x6"]}
 
-Kullanım: .venv/bin/python uretim.py plan.json [--klasor data/hazir/kamerali] [--kamera 1390:144:530:296]
+Kullanım: .venv/bin/python uretim.py plan.json [--kamera 1390:144:530:296] [--yerlesim tam]
+Çıktı klasörü verilmezse her klip kendi yayınının klasörüne gider: data/hazir/<yayinci>/<yayin-tarihi>/shorts/
 """
 import argparse
 import json
@@ -15,21 +16,26 @@ import subprocess
 import sys
 from pathlib import Path
 
+from klasor import cikti_klasoru
+
 KOK = Path(__file__).resolve().parent
 ap = argparse.ArgumentParser()
 ap.add_argument("plan")
-ap.add_argument("--klasor", default="data/hazir")
+ap.add_argument("--klasor", help="elle çıktı klasörü (varsayılan: data/hazir/<yayinci>/<tarih>/shorts)")
 ap.add_argument("--kamera", help="plandaki her klibe uygulanacak kamera kutusu x:y:g:y")
 ap.add_argument("--yerlesim", default="kutulu", help="kutulu | tam")
 ap.add_argument("--sadece", help="yalnız bu ön eklerle başlayan klipler, virgülle: 02,04")
 a = ap.parse_args()
 
-klasor = KOK / a.klasor
-klasor.mkdir(parents=True, exist_ok=True)
 plan = json.loads(Path(a.plan).read_text())
 if a.sadece:
     plan = [k for k in plan if k["ad"].startswith(tuple(a.sadece.split(",")))]
+klasorler = []
 for k in plan:
+    klasor = KOK / a.klasor if a.klasor else cikti_klasoru(k["girdi"], "shorts")
+    klasor.mkdir(parents=True, exist_ok=True)
+    if klasor not in klasorler:
+        klasorler.append(klasor)
     cikti = klasor / f"{k['ad']}.mp4"
     if cikti.exists():
         print(f"= {k['ad']} zaten var")
@@ -51,4 +57,5 @@ for k in plan:
     print(("✔ " if sonuc.returncode == 0 else "✘ ") + k["ad"], flush=True)
     if sonuc.returncode:
         print(sonuc.stderr[-800:])
-subprocess.run([sys.executable, str(KOK / "onay.py"), str(klasor)])
+for klasor in klasorler:
+    subprocess.run([sys.executable, str(KOK / "onay.py"), str(klasor)])

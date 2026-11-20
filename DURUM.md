@@ -4,6 +4,11 @@
 
 ## 2026-11-20 gece — Oturum 6 (ThinkPad devraldı)
 
+- **Klasör düzeni (kullanıcı kararı):** `data/hazir/<yayıncı>/<yayın tarihi>/{shorts,video}/`. Eski hd/, wtcn/, uzun/ taşındı;
+  kayit.jsonl (yedek `kayit-yedek-klasor-oncesi.jsonl`) ve sira.txt yolları güncellendi. uretim.py/uzun.py klasörü kendi bulur.
+- Küfür: sansür yok (YouTube Temmuz 2025 kuralı); başlık/küçük resimde küfür yok — `docs/formuller.md`.
+- Git: github.com/oguzhandemirc/klip-sokagi bağlandı; pull yalnız kullanıcı söylerse.
+
 - Devir tamam (DEVIR.md): ikinci paket açıldı, Mac döngüleri kapalı, yükleme YALNIZ ThinkPad'de.
 - Görev Zamanlayıcı `\KlipSokagi\`: `dongu` (10 dk), `gece` (eray:0 ✔ 1e73b293 15 aday, tolunayoren:1, wtcn:2), `bitince_rraenee`.
   `yeniden_dene.py` yerine `dongu.py` + onaylı kuyruk `data/onayli/sira.txt` (05,01,04,06,07,08; sınır hâlâ kapalı).

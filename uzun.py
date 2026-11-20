@@ -11,7 +11,8 @@ Plan (JSON):
  "bolumler": [{"girdi": "data/parca/X-03.mp4", "bas": 5, "sure": 40, "baslik": "Tekne mangrova gömüldü",
                "baglam": "Görev başarısız olmadan önce…"}]}
 
-Kullanım: .venv/bin/python uzun.py plan-uzun.json [--klasor data/hazir/uzun]
+Kullanım: .venv/bin/python uzun.py plan-uzun.json
+Çıktı klasörü verilmezse ilk bölümün yayını: data/hazir/<yayinci>/<yayin-tarihi>/video/
 """
 import argparse
 import json
@@ -22,6 +23,7 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
 from duzenle import FONT_KALIN, FONT_NORMAL, KICK_YESIL, tr_buyuk
+from klasor import cikti_klasoru
 
 KOK = Path(__file__).resolve().parent
 EN, BOY, FPS = 1920, 1080, 60
@@ -106,11 +108,11 @@ def zaman(sn):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("plan")
-    ap.add_argument("--klasor", default="data/hazir/uzun")
+    ap.add_argument("--klasor", help="elle çıktı klasörü (varsayılan: data/hazir/<yayinci>/<tarih>/video)")
     ap.add_argument("--logo", default=str(KOK / "marka" / "logo-B-rozet.png"))
     a = ap.parse_args()
     p = json.loads(Path(a.plan).read_text())
-    klasor = KOK / a.klasor
+    klasor = KOK / a.klasor if a.klasor else cikti_klasoru(p["bolumler"][0]["girdi"], "video")
     klasor.mkdir(parents=True, exist_ok=True)
     cikti = klasor / f"{p['ad']}.mp4"
 
