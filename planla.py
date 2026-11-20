@@ -59,8 +59,10 @@ def main():
     dolu, yuklu = dolu_ve_yuklu()
     # En erken: 1 saat sonrası (YouTube işleme süresi payı) ve son dolu saatten sonrası.
     en_erken = datetime.now(TZ) + timedelta(hours=1)
-    if dolu:
-        en_erken = max(en_erken, max(datetime.strptime(d, "%Y-%m-%d %H:%M").replace(tzinfo=TZ) for d in dolu))
+    # Yalnız Short saatleri sayılır: yatay videonun 20:00'si (dongu.py) Short takvimini ileri itmesin.
+    short_dolu = [d for d in dolu if d[-5:] in saatler()]
+    if short_dolu:
+        en_erken = max(en_erken, max(datetime.strptime(d, "%Y-%m-%d %H:%M").replace(tzinfo=TZ) for d in short_dolu))
     slot = bos_saatler(dolu, en_erken)
     for v in a.videolar:
         if proje_yolu(Path(v).resolve()) in yuklu:

@@ -3,7 +3,8 @@
 yalnız kullanıcının onayladığı klipler yüklenir (CLAUDE.md kural 5).
 
 Her çalışmada:
- 1. Yükle   — data/onayli/sira.txt'deki onaylı Short'lar → planla.py --gercek (ilk boş saate gizli+planlı).
+ 1. Yükle   — data/onayli/sira.txt'deki onaylı yatay videolar → yukle.py (ilk boş Pzt/Çar/Cum 20:00), sonra
+              Short'lar → planla.py --gercek (ilk boş 13:00/18:00/21:00); hepsi gizli+planlı.
               uploadLimitExceeded gelirse 30 dk sonra yeniden dener. Başka planla/yeniden_dene çalışıyorsa atlar.
  2. Temizle — yayın saati geçmiş yüklemelerin çıktı .mp4'ü ve (bekleyen başka klip kullanmıyorsa) ham parçası
               silinir; .json/.jpg kalır (aciklama_guncelle.py için).
@@ -78,7 +79,7 @@ def yukle(durum, calisan, kuru):
     if not SIRA.exists():
         return
     yuklu = yuklenenler()
-    bekleyen = []
+    shorts, videolar = [], []
     for satir in SIRA.read_text().splitlines():
         s = satir.strip()
         if not s or s.startswith("#"):
@@ -89,31 +90,64 @@ def yukle(durum, calisan, kuru):
         if not yol.exists():
             log("✘ sira.txt'deki dosya yok:", s)
             continue
-        if "aciklama_son" in json.loads(yol.with_suffix(".json").read_text()):
-            log("! yatay video planla.py ile yüklenmez, elle yukle.py --zaman:", s)
-            continue
-        bekleyen.append(str(yol))
-    if not bekleyen:
+        uzun = "aciklama_son" in json.loads(yol.with_suffix(".json").read_text())
+        (videolar if uzun else shorts).append(str(yol))
+    if not shorts and not videolar:
         return
-    if any("planla.py" in c or "yeniden_dene.py" in c for c in calisan):
-        log(f"yükleme atlandı: başka yükleme süreci çalışıyor ({len(bekleyen)} bekliyor)")
+    if any("planla.py" in c or "yeniden_dene.py" in c or "yukle.py" in c for c in calisan):
+        log(f"yükleme atlandı: başka yükleme süreci çalışıyor ({len(shorts) + len(videolar)} bekliyor)")
         return
     if time.time() - durum.get("sinir_zamani", 0) < YUKLEME_ARA:
         return
-    if kuru:
-        log(f"[kuru] {len(bekleyen)} onaylı klip planla.py ile yüklenecek:", *(Path(b).name for b in bekleyen))
+    # Yatay videolar önce (saatleri sabit Pzt/Çar/Cum 20:00, kaçarsa 2-3 gün kayar), sonra Short'lar.
+    for v in videolar:
+        zaman = video_saati(yuklu)
+        if kuru:
+            log(f"[kuru] yatay video {zaman}: {Path(v).name}")
+            continue
+        r = subprocess.run([sys.executable, str(KOK / "yukle.py"), v, "--zaman", zaman, "--gercek"],
+                           capture_output=True, text=True, cwd=KOK)
+        if not sonucu_isle(r, durum, f"yatay {zaman} {Path(v).name}"):
+            return
+        yuklu = yuklenenler()
+    if not shorts:
         return
-    r = subprocess.run([sys.executable, str(KOK / "planla.py"), *bekleyen, "--gercek"],
+    if kuru:
+        log(f"[kuru] {len(shorts)} onaylı Short planla.py ile yüklenecek:", *(Path(b).name for b in shorts))
+        return
+    r = subprocess.run([sys.executable, str(KOK / "planla.py"), *shorts, "--gercek"],
                        capture_output=True, text=True, cwd=KOK)
+    sonucu_isle(r, durum, "planla.py")
+
+
+def sonucu_isle(r, durum, ad):
+    """Yükleme çıktısını loglar; sınır ya da hata varsa False (sonraki yüklemeler bu tur denenmez)."""
     cikti = r.stdout + r.stderr
     for satir in cikti.splitlines():
         if "✔" in satir or "✘" in satir or re.match(r"\d{4}-\d\d-\d\d \d\d:\d\d ", satir):
             log("  ", satir.strip()[:150])
     if "uploadLimitExceeded" in cikti or "exceeded the number of videos" in cikti:
         durum["sinir_zamani"] = time.time()
-        log("YouTube günlük yükleme sınırı; 30 dk sonra yeniden")
-    elif r.returncode:
-        log("✘ planla.py hata:", cikti[-400:])
+        log(f"YouTube günlük yükleme sınırı ({ad}); 30 dk sonra yeniden")
+        return False
+    if r.returncode:
+        log(f"✘ {ad} hata:", cikti[-400:])
+        return False
+    return True
+
+
+def video_saati(yuklu):
+    """Yatay video için ilk boş Pzt/Çar/Cum 20:00 (en az 1 sa sonrası; docs/strateji.md)."""
+    dolu = {datetime.fromisoformat(k["publishAt"]).astimezone(SAAT_DILIMI).strftime("%Y-%m-%d %H:%M")
+            for k in yuklu.values() if k.get("publishAt")}
+    en_erken = datetime.now(SAAT_DILIMI) + timedelta(hours=1)
+    gun = en_erken.date()
+    while True:
+        aday = datetime.combine(gun, datetime.min.time(), SAAT_DILIMI).replace(hour=20)
+        anahtar = aday.strftime("%Y-%m-%d %H:%M")
+        if gun.weekday() in (0, 2, 4) and aday > en_erken and anahtar not in dolu:
+            return anahtar
+        gun += timedelta(days=1)
 
 
 # ---------- 2. Temizlik ----------

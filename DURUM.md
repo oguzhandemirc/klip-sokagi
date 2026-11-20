@@ -7,6 +7,9 @@
 - **Klasör düzeni (kullanıcı kararı):** `data/hazir/<yayıncı>/<yayın tarihi>/{shorts,video}/`. Eski hd/, wtcn/, uzun/ taşındı;
   kayit.jsonl (yedek `kayit-yedek-klasor-oncesi.jsonl`) ve sira.txt yolları güncellendi. uretim.py/uzun.py klasörü kendi bulur.
 - Küfür: sansür yok (YouTube Temmuz 2025 kuralı); başlık/küçük resimde küfür yok — `docs/formuller.md`.
+- Mac'ten `shorts-klipler.tar.gz` geldi: 15 dosyanın hepsi eldekilerle SHA256 aynı → açılmadı (kopya olurdu).
+  Kullanıcı Mac talimatını iletti → **RRaenee gün 1 yatay video onaylı**, sira.txt'de; dongu.py yatay videoları da yükler
+  (ilk boş Pzt/Çar/Cum 20:00 → 20 Kas 20:00). planla.py Short takvimini yalnız 13/18/21'e göre ilerletir.
 - Git: github.com/oguzhandemirc/klip-sokagi bağlandı; pull yalnız kullanıcı söylerse.
 
 - Devir tamam (DEVIR.md): ikinci paket açıldı, Mac döngüleri kapalı, yükleme YALNIZ ThinkPad'de.
