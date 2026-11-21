@@ -2,6 +2,13 @@
 
 > Her oturumun sonunda güncelle. En yeni kayıt en üstte.
 
+## 2026-11-21 — Gözetimsiz üretim: RRaenee 3. yayın (43fa1bac)
+
+- 15 parçadan 2 Short üretildi ve kuyruğa girdi: uzaylılar kaçırdı (UFO/kupa anı), ATV ile ambulans kovalama. Yatay video yok (4+ iyi an çıkmadı).
+- Elenenler: selam/sponsor/sohbetli kısım (01,02,05,12), duş sahnesi/cinsel içerik (04), menü ve mağaza (07), müzik/yabancı diyalog (03),
+  oyun yorumu/teknik konuşma (09,14,15), karanlık ve zayıf görüntü (08), karışık döküm (11), belirsiz an (10).
+- Kamera 1390:144:530:296 doğrulandı; sorun yok. Plan: plan-rraenee-2026-11-20.json.
+
 ## 2026-11-20 öğlen — Oturum 6 devam
 
 - YouTube sınırı 11:49'da açıldı; dongu.py yükledi: gün1 yatay (20 Kas 20:00), 05/01 (20 Kas 18:00/21:00),
