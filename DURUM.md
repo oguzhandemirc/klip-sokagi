@@ -2,6 +2,12 @@
 
 > Her oturumun sonunda güncelle. En yeni kayıt en üstte.
 
+## 2026-11-22 — Gözetimsiz üretim: RRaenee 4. yayın (849e9b7f)
+
+- 15 parçadan 1 Short üretildi ve kuyruğun başına girdi: polis kovalamacası, araç köprüden suya (parça 07). Yatay video yok.
+- Elenenler: sohbet/PlayStation kafe/site konuşması (02,04,06,11,03), sponsor-çekiliş-t-shirt (01,08,09), menü ve hikâye ara sahnesi (05,10,13), saç seçimi (12), teknik arıza (15), zayıf kaza (14). 02 ve 04 aynı an.
+- Kamera 1390:144:530:296 doğrulandı; sorun yok. Plan: plan-rraenee-2026-11-21.json.
+
 ## 2026-11-21 — Gözetimsiz üretim: RRaenee 3. yayın (43fa1bac)
 
 - 15 parçadan 2 Short üretildi ve kuyruğa girdi: uzaylılar kaçırdı (UFO/kupa anı), ATV ile ambulans kovalama. Yatay video yok (4+ iyi an çıkmadı).
