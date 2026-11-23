@@ -2,6 +2,13 @@
 
 > Her oturumun sonunda güncelle. En yeni kayıt en üstte.
 
+## 2026-11-23 — Gözetimsiz üretim: RRaenee 5. yayın (5dbb1e44)
+
+- 15 parçadan 1 Short üretildi, kuyrukta 2. sıraya girdi: yat arabayla iç içe geçmiş glitch (parça 15). Yatay video yok.
+- Elenenler: hikâye görevi/soygun ara sahnesi (01,05), silah-görev sohbeti (02,03,04), selam/sohbet/yemek (06,09,10,11,12), IRL (07), bozuk döküm (08), konuşma/keşif (13,14).
+- Bu yayında kamera 60 px aşağıda: 1390:204:530:296 (config'teki 144 üstte oyun şeridi sızdırıyor; config değiştirilmedi, --kamera ile verildi). Altyazı kelimeleri yalnız klibin son ~5 sn'sini kapsıyor (Whisper ilk kısmı atladı), kabul edildi.
+- Plan: plan-rraenee-2026-11-22.json.
+
 ## 2026-11-22 — Gözetimsiz üretim: RRaenee 4. yayın (849e9b7f)
 
 - 15 parçadan 1 Short üretildi ve kuyruğun başına girdi: polis kovalamacası, araç köprüden suya (parça 07). Yatay video yok.
