@@ -2,6 +2,12 @@
 
 > Her oturumun sonunda güncelle. En yeni kayıt en üstte.
 
+## 2026-11-24 — Gözetimsiz üretim: RRaenee 6. yayın (d15af8e8)
+
+- 15 parçadan 1 Short üretildi, kuyrukta 3. sıraya girdi: motel avlusu çatışması + arabayla polisten kaçış (parça 10). Yatay video yok.
+- Elenenler: hikâye ara sahneleri/görev diyalogları (04,05,06,09,11,12,14), menü/harita (08,13), sohbet/teknik/koku şakası (01,02,03,15), kulüp ara sahnesi (07). Yayın zayıf: stüdyo tepkisi az.
+- Kamera 1390:204:530:296 doğrulandı (config'teki 144 değil; config değiştirilmedi). Plan: plan-rraenee-2026-11-23.json.
+
 ## 2026-11-23 — Gözetimsiz üretim: RRaenee 5. yayın (5dbb1e44)
 
 - 15 parçadan 1 Short üretildi, kuyrukta 2. sıraya girdi: yat arabayla iç içe geçmiş glitch (parça 15). Yatay video yok.
