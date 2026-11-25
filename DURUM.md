@@ -2,6 +2,12 @@
 
 > Her oturumun sonunda güncelle. En yeni kayıt en üstte.
 
+## 2026-11-25 — Gözetimsiz üretim: RRaenee 7. yayın FİNAL (6d1e7177)
+
+- 15 parçadan 1 Short üretildi, kuyruğun başına girdi: timsah saldırısı (parça 10). Yatay video yok.
+- Elenenler: final yayını hikâye ara sahnesi/görev/menü/sohbet ağırlıklı, spoiler riski (02,04,06,09,11,12,14), bekleme/sohbet (01,03,05,07,08,13,15).
+- Kamera 1390:204:530:296 doğrulandı (config'teki 144 değil; config değiştirilmedi). Plan: plan-rraenee-2026-11-24.json.
+
 ## 2026-11-24 — Gözetimsiz üretim: RRaenee 6. yayın (d15af8e8)
 
 - 15 parçadan 1 Short üretildi, kuyrukta 3. sıraya girdi: motel avlusu çatışması + arabayla polisten kaçış (parça 10). Yatay video yok.
